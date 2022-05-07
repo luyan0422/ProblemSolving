@@ -24,15 +24,13 @@ int main(){
 void lCS(char *a, char *b){
     int len1 = strlen(a);
     int len2 = strlen(b);
-    char dp[len1 + 1][len2 + 1] ;
+    int dp[len1 + 1][len2 + 1] ;
     
     for (int i = 0; i <= len1; i++)
         dp[i][0] = 0;       //.初始化
     for (int j = 0; j <= len2; j++)
         dp[0][j] = 0;       //.初始化
     
-    cout << dp[0][0];
-
     for (int i = 1; i <= len1; i++) {
         for (int j = 1; j <= len2; j++) {
             if (a[i-1] == b[j-1]){
