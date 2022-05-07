@@ -13,21 +13,32 @@ int main(){
 }
 
 void test(int len){
-    stack<int> temp;
-    int input[len]; //放題目測資
-    int k;
+    
     while(1){
+        stack<int> temp; //create a stack name temp
+        int k;   //k for輸入項 
+        int point = 1; //point for 準備要進入stack的數字
+        int top = 0; //紀錄top在第幾個
+
         for(int i = 0; i < len; i++){
-            cin >> k;
-            if(k == 0) return;
-            input[i] = k; //題目測資輸入
-        }
-        for(int i = 1; i <= len; i++){
-            for(int j = 1; j <= len; j++){
-                if(j <= input[i - 1]){
-                    temp.push(j);
+            cin >> k;   //題目測資輸入
+            if(k == 0){
+                return; //如果測到零 代表測資結束
+            }
+            else{
+                for(int i = point; i <= k; i++){
+                    temp.push(i); //小於等於數列數字的數push進去
+                    point++;
+                    top++;
                 }
             }
+            temp.pop();
+            top--;
         }
+
+        if(temp.empty()){
+            cout << "Yes\n";
+        }
+        else cout << "No\n";
     }
 }
