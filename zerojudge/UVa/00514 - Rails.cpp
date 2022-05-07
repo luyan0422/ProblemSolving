@@ -31,9 +31,11 @@ void test(int len){
                     point++;
                     top++;
                 }
-            }
-            temp.pop();
-            top--;
+                if(temp.top()==k){
+                    temp.pop();
+                    top--;
+                }
+            }  
         }
 
         if(temp.empty()){
