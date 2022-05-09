@@ -2,7 +2,7 @@
 #include<cstring>
 #include<cctype>
 using namespace std;
-void CountWord(char n[]);
+
 
 int main(){
     string n;
