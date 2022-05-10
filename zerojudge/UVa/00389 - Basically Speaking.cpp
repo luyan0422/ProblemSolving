@@ -1,5 +1,4 @@
 #include<iostream>
-#include<cmath>
 #include<cstdlib>
 using namespace std;
 
@@ -14,10 +13,10 @@ int main(){
             k++;
         } // 判斷有幾位輸入數字
 
-        for(int i = k; i >= 0; i--){ 
-            count += 
-                pow(a, k - i) * (num[i] > 64 ? num[i] - 55 : num[i] - 48);
+        for(int i = 0; i <= k - 1 ; i++){ 
+            count = ( count + (num[i] > 64 ? num[i] - 55 : num[i] - 48)) * a;
         }
+        count += (num[k] > 64 ? num[k] - 55 : num[k] - 48);
 
         for(int i = 0; i < 7 && count != 0; i++){
             num[i] = (count % b) > 9 ? (count % b) + 55 : (count % b) + 48;
@@ -37,6 +36,17 @@ int main(){
         cout << "\n";      
     } 
     return 0;
+    
 }
+
+
+        /*for(int i = k; i >= 0; i--){ 
+            count += 
+                pow(a, k - i) * (num[i] > 64 ? num[i] - 55 : num[i] - 48);
+        }
+
+      
+    return 0;
+}*/.  //可以更換成上面的解法 就不用呼叫次方函式 1234 = ((1 * 10) + 2) * 10 + 3)*10 + 4
 
 
