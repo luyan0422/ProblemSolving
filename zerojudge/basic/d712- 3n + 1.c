@@ -1,5 +1,5 @@
 #include<stdio.h>
-const int MAX = 1000001;
+const int LENGTH = 1000001;
 
 typedef struct indexValue
 {
@@ -7,14 +7,14 @@ typedef struct indexValue
     int j;
 }inV;  //紀錄開始和結束的區間
 
-void caculate(int a[], int left, int right); //build a table
+void calculate(int a[], int left, int right); //build a table
 void buildTree(int a[], int tree[], inV index[], int node, int start, int end);
 int findMax(int a[], int tree[], inV index[], int root, int i, int j); //find max in table an return value
 int max(int i, int j);
 
 //放在 main 裏面會記憶體區段錯誤
 int a[1000001];
-inV index[2000001];  //紀錄 a 中的點對應到 tree 的 node 編號
+inV index[2100000];  //紀錄 a 中的點對應到 tree 的 node 編號
 int tree[2100000];// 紀錄區段最大值
 
 int main(){
@@ -22,12 +22,12 @@ int main(){
     a[0] = -1;
     a[1] = 1;
     a[2] = 2;
-    for(int i = 4; i < MAX; i += i){  // 2 的平方倍可以先做
+    for(int i = 4; i < LENGTH; i += i){  // 2 的平方倍可以先做
         a[i] = a[i /2] + 1;
     }
 
-    caculate(a, 1, MAX - 1);
-    buildTree(a, tree, index, 1, 1, MAX - 1);
+    calculate(a, 1, LENGTH - 1);
+    buildTree(a, tree, index, 1, 1, LENGTH - 1);
 
     int i, j;
     while(scanf("%d %d", &i, &j) != EOF){
@@ -43,14 +43,14 @@ int main(){
 }
 
 
-void caculate(int a[], int left, int right){ // 想要利用遞迴建表
+void calculate(int a[], int left, int right){ // 想要利用遞迴建表
     if(left == right){
         long long int temp = left;
         int count = 1;
         while(a[left] == 0){
             //printf("temp = %d, count = %d\n",temp,count);
             if(temp % 2 == 0){
-                if((temp / 2) <= MAX && a[temp / 2] != 0){
+                if((temp / 2) <= LENGTH && a[temp / 2] != 0){
                     count += a[temp / 2];
                     a[left] = count;  //while 終止條件
                 }
@@ -60,7 +60,7 @@ void caculate(int a[], int left, int right){ // 想要利用遞迴建表
                 }
             }
             else{
-                if((temp * 3 + 1) <= MAX && a[temp * 3 + 1] != 0 ){
+                if((temp * 3 + 1) <= LENGTH && a[temp * 3 + 1] != 0 ){
                     count += a[temp * 3 + 1];
                     a[left] = count;  //while 終止條件
                     a[left * 2] = count + 1; // 因為 3n + 1 < max 所以 2n 必小於 max 可以多做一步
@@ -77,8 +77,8 @@ void caculate(int a[], int left, int right){ // 想要利用遞迴建表
     }
     else{
         int mid = (left + right) / 2;
-        caculate(a, left , mid);
-        caculate(a, mid + 1, right);
+        calculate(a, left , mid);
+        calculate(a, mid + 1, right);
     }
 }
 
@@ -99,10 +99,10 @@ int findMax(int a[], int tree[], inV index[], int root, int i, int j){ //利用�
         int left_node = 2 * root;
         int right_node = 2 * root + 1;
         if(mid < i){        //代表 i,j 都在 root 右邊
-            findMax(a, tree, index, right_node, i, j);
+            return findMax(a, tree, index, right_node, i, j);
         }
         else if(mid >= j){      //代表 i,j 都在 root 左邊
-            findMax(a, tree, index, left_node, i, j);
+            return findMax(a, tree, index, left_node, i, j);
         }
         else{
             return max(findMax(a, tree, index, left_node, i, mid), findMax(a, tree, index, right_node, mid + 1, j));
