@@ -47,7 +47,7 @@ void calculate(int a[], int left, int right){ // 想要利用遞迴建表
     for(int i = left; i <= right; i++){
         long long int temp = i;
         int count = 1;
-        while(a[left] == 0){
+        while(a[i] == 0){
             //printf("temp = %d, count = %d\n",temp,count);
             if(temp % 2 == 0){
                 if((temp / 2) <= LENGTH && a[temp / 2] != 0){
@@ -71,7 +71,7 @@ void calculate(int a[], int left, int right){ // 想要利用遞迴建表
                 }
 
             }
-        }   
+        }
 
     }
 }
@@ -135,18 +135,6 @@ int max(int i, int j){
 
 
 
-    /*檢查用
-    for(int i = 1; i < 10; i++){  
-        printf("index[%d].i = %d\nindex[%d].j = %d\n", i, index[i].i, i, index[i].j);
-    }
-
-    for(int i = 1; i < 10; i++){
-        printf("tree[%d].= %d\n", i, tree[i]);
-    }
-    for(int i = 1; i < 10; i++){
-        printf("a[%d].= %d\n", i, a[i]);
-    }
-    */
-
+    
     
 
