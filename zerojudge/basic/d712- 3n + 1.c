@@ -44,15 +44,15 @@ int main(){
 
 
 void calculate(int a[], int left, int right){ // 想要利用遞迴建表
-    if(left == right){
-        long long int temp = left;
+    for(int i = left; i <= right; i++){
+        long long int temp = i;
         int count = 1;
         while(a[left] == 0){
             //printf("temp = %d, count = %d\n",temp,count);
             if(temp % 2 == 0){
                 if((temp / 2) <= LENGTH && a[temp / 2] != 0){
                     count += a[temp / 2];
-                    a[left] = count;  //while 終止條件
+                    a[i] = count;  //while 終止條件
                 }
                 else{
                     temp /= 2;
@@ -62,8 +62,8 @@ void calculate(int a[], int left, int right){ // 想要利用遞迴建表
             else{
                 if((temp * 3 + 1) <= LENGTH && a[temp * 3 + 1] != 0 ){
                     count += a[temp * 3 + 1];
-                    a[left] = count;  //while 終止條件
-                    a[left * 2] = count + 1; // 因為 3n + 1 < max 所以 2n 必小於 max 可以多做一步
+                    a[i] = count;  //while 終止條件
+                    a[i * 2] = count + 1; // 因為 3n + 1 < max 所以 2n 必小於 max 可以多做一步
                 }
                 else{
                     temp = temp * 3 + 1;
@@ -71,14 +71,8 @@ void calculate(int a[], int left, int right){ // 想要利用遞迴建表
                 }
 
             }
-        }
-        
+        }   
 
-    }
-    else{
-        int mid = (left + right) / 2;
-        calculate(a, left , mid);
-        calculate(a, mid + 1, right);
     }
 }
 
